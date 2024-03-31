@@ -13,6 +13,10 @@ namespace SocketTCP
             ApplicationConfiguration.Initialize();
             Application.Run(new FormTcpServer());
             //修改
+
+
+
+            //zj
         }
     }
 }
