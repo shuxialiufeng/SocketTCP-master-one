@@ -13,15 +13,6 @@ namespace SocketTCP
             ApplicationConfiguration.Initialize();
             Application.Run(new FormTcpServer());
 
-            ///修改master2
-
-            //修改
-
-
-
-            //zj
-            
-            //没有///22222223
             
             //分支master1
             ////////////////11111
