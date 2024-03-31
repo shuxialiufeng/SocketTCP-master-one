@@ -20,7 +20,12 @@ namespace SocketTCP
 
 
             //zj
+<<<<<<< HEAD
             //没有///
+=======
+            //分支master1
+            
+>>>>>>> origin/master1
         }
     }
 }

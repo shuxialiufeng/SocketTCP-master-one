@@ -2,10 +2,11 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+//åˆ†æ”¯master1
 
 namespace SocketTCP
 {
-    //ÉùÃ÷Î¯ÍÐ
+    //ï¿½ï¿½ï¿½ï¿½Î¯ï¿½ï¿½
     delegate void AddOnlineDelegate(string str, bool flag);
 
     delegate void RecvMsgDelegate(string msg);
@@ -26,34 +27,34 @@ namespace SocketTCP
         Socket socket = null;
 
         SaveFIleDelegate MySaveFile;
-        //´´½¨¸ºÔð¼àÌý¿Í»§¶ËµÄÏß³Ì
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ëµï¿½ï¿½ß³ï¿½
         Thread threadListen = null;
 
-        //´´½¨ipÓësocketµÄ×Öµä
+        //ï¿½ï¿½ï¿½ï¿½ipï¿½ï¿½socketï¿½ï¿½ï¿½Öµï¿½
         Dictionary<string, Socket> DicSocket = new Dictionary<string, Socket>();
 
         private void btn_startServer_Click(object sender, EventArgs e)
         {
-            //TCPÍ¨Ñ¶·½Ê½£¬²ÉÓÃstreamÁ÷·½Ê½½øÐÐ IPV4
+            //TCPÍ¨Ñ¶ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½streamï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ IPV4
             this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            IPAddress address = IPAddress.Parse(this.txt_IP.Text.Trim());//È¥³ý¿Õ¸ñ
+            IPAddress address = IPAddress.Parse(this.txt_IP.Text.Trim());//È¥ï¿½ï¿½ï¿½Õ¸ï¿½
 
-            //¸ù¾ÝipµØÖ·ºÍ¶Ë¿ÚºÅ´´½¨PE¶ÔÏó
+            //ï¿½ï¿½ï¿½ï¿½ipï¿½ï¿½Ö·ï¿½Í¶Ë¿ÚºÅ´ï¿½ï¿½ï¿½PEï¿½ï¿½ï¿½ï¿½
             IPEndPoint endPoint = new IPEndPoint(address, int.Parse(this.txt_Port.Text));
 
             try
             {
-                //°ó¶¨
+                //ï¿½ï¿½
                 socket.Bind(endPoint);
-                Invoke(recvMsg, "·þÎñ¿ªÆô³É¹¦");
-                MessageBox.Show("¿ªÆô·þÎñ³É¹¦!", "´ò¿ª·þÎñ");
+                Invoke(recvMsg, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
+                MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½!", "ï¿½ò¿ª·ï¿½ï¿½ï¿½");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("¿ªÆô·þÎñÊ§°Ü" + ex.Message, "´ò¿ª·þÎñ");
+                MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½" + ex.Message, "ï¿½ò¿ª·ï¿½ï¿½ï¿½");
             }
-            //×î³¤¼àÌýÊ±¼ä
+            //ï¿½î³¤ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
             socket.Listen(1000);
 
             threadListen = new Thread(ListenConnect);
@@ -67,20 +68,20 @@ namespace SocketTCP
         {
             while (true)
             {
-                //½ÓÊÜµ½¿Í»§¶ËÁ¬½Ó£¬Ôò»ñÈ¡socketclient
+                //ï¿½ï¿½ï¿½Üµï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½È¡socketclient
                 Socket socketClient = socket.Accept();
 
-                string client = socketClient.RemoteEndPoint.ToString();//»ñÈ¡Á¬½ÓµØÖ·ºÍ¶Ë¿ÚºÅ
+                string client = socketClient.RemoteEndPoint.ToString();//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Óµï¿½Ö·ï¿½Í¶Ë¿Úºï¿½
 
                 DicSocket.Add(client, socketClient);
 
-                //invoke ÒÀ´Î½øÐÐÎ¯ÍÐÊÂ¼þÖ´ÐÐ
+                //invoke ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½Î¯ï¿½ï¿½ï¿½Â¼ï¿½Ö´ï¿½ï¿½
                 Invoke(myAddOnline, client, true);
-                Invoke(RecvMsg, client + "ÉÏÏßÁË!");
-                //Òì²½Ö´ÐÐ
+                Invoke(RecvMsg, client + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
+                //ï¿½ì²½Ö´ï¿½ï¿½
                 //BeginInvoke(myAddOnline, client);
 
-                //¿ªÆô½ÓÊÜÊý¾Ý
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 Thread thread = new Thread(ReceiveMsg);
                 thread.IsBackground = true;
                 thread.Start(socketClient);
@@ -92,7 +93,7 @@ namespace SocketTCP
             Socket socket = socketClient as Socket;
             while (true)
             {
-                //2M»º³åÇø
+                //2Mï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 byte[] arrMsgResc = new byte[1024 * 1024 * 2];
 
                 string client = socket.RemoteEndPoint.ToString();
@@ -104,11 +105,11 @@ namespace SocketTCP
                 }
                 catch (Exception ex)
                 {
-                    //´Ó×ÖµäÖÐÒÆ³ý¸ÃSocket
+                    //ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½Socket
                     DicSocket.Remove(client);
-                    Invoke(recvMsg, client + "ÏÂÏßÁË!");
+                    Invoke(recvMsg, client + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 
-                    //´ÓÁÐ±íÖÐÒÆ³ý¸ÃSocket
+                    //ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½Socket
                     Invoke(myAddOnline, client, false);
                     break;
                 }
@@ -118,10 +119,10 @@ namespace SocketTCP
                     if (arrMsgResc[0] == 0)
                     {
                         string msg = Encoding.UTF8.GetString(arrMsgResc, 1, length - 1);
-                        string str = "[½ÓÊÕ]  " + client + ": " + msg;
+                        string str = "[ï¿½ï¿½ï¿½ï¿½]  " + client + ": " + msg;
                         Invoke(recvMsg, str);
                     }
-                    else//½ÓÊÕÎÄ¼þÀàÐÍ
+                    else//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
                     {
                         Invoke(MySaveFile, arrMsgResc, length);
                     }
@@ -155,12 +156,12 @@ namespace SocketTCP
             string strMsg = this.txt_send.Text.Trim();
             byte[] arrMsg = Encoding.UTF8.GetBytes(strMsg);
             byte[] sendMsg = new byte[arrMsg.Length + 1];
-            sendMsg[0] = 0; //0±êÖ¾Î»´ú±íÏûÏ¢
+            sendMsg[0] = 0; //0ï¿½ï¿½Ö¾Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 
             Buffer.BlockCopy(arrMsg, 0, sendMsg, 1, arrMsg.Length);
             if (this.lbOnline.SelectedItems.Count == 0)
             {
-                MessageBox.Show("ÇëÑ¡ÔñÒª·¢ËÍµÄ¿Í»§¶Ë", "·¢ËÍÐÅÏ¢");
+                MessageBox.Show("ï¿½ï¿½Ñ¡ï¿½ï¿½Òªï¿½ï¿½ï¿½ÍµÄ¿Í»ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢");
                 return;
             }
             else
@@ -169,7 +170,7 @@ namespace SocketTCP
                 {
                     DicSocket[client].Send(sendMsg);
 
-                    string str = "[·¢ËÍµ½]  " + client + ": " + strMsg;
+                    string str = "[ï¿½ï¿½ï¿½Íµï¿½]  " + client + ": " + strMsg;
 
                     Invoke(recvMsg, str);
                 }
@@ -182,18 +183,18 @@ namespace SocketTCP
             string strMsg = this.txt_send.Text.Trim();
             byte[] arrMsg = Encoding.UTF8.GetBytes(strMsg);
             byte[] sendMsg = new byte[arrMsg.Length + 1];
-            sendMsg[0] = 0; //0±êÖ¾Î»´ú±íÏûÏ¢
+            sendMsg[0] = 0; //0ï¿½ï¿½Ö¾Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 
             Buffer.BlockCopy(arrMsg, 0, sendMsg, 1, arrMsg.Length);
             foreach (string client in this.lbOnline.Items)
             {
                 DicSocket[client].Send(sendMsg);
 
-                string str = "[·¢ËÍ]  " + client + ": " + strMsg;
+                string str = "[ï¿½ï¿½ï¿½ï¿½]  " + client + ": " + strMsg;
 
                 Invoke(recvMsg, str);
             }
-            Invoke(recvMsg, "[Èº·¢] Èº·¢Íê±Ï");
+            Invoke(recvMsg, "[Èºï¿½ï¿½] Èºï¿½ï¿½ï¿½ï¿½ï¿½");
         }
 
         private void btn_openClient_Click(object sender, EventArgs e)
@@ -217,26 +218,26 @@ namespace SocketTCP
         {
             if (string.IsNullOrEmpty(this.txt_selectFile.Text))
             {
-                MessageBox.Show("ÇëÑ¡ÔñÄãÒª·¢ËÍµÄÎÄ¼þ£¡", "·¢ËÍÎÄ¼þ");
+                MessageBox.Show("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Íµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
                 return;
             }
             var items = this.lbOnline.SelectedItems;
             if (items == null || items.Count == 0)
             {
-                MessageBox.Show("ÇëÑ¡ÔñÄãÒª·¢ËÍµ½µÄ¿Í»§¶Ë£¡", "·¢ËÍÎÄ¼þ");
+                MessageBox.Show("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Íµï¿½ï¿½Ä¿Í»ï¿½ï¿½Ë£ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
                 return;
             }
             using (FileStream fs = new FileStream(this.txt_selectFile.Text, FileMode.Open))
             {
-                //¶¨Òå2M¿Õ¼ä
+                //ï¿½ï¿½ï¿½ï¿½2Mï¿½Õ¼ï¿½
                 const long fileSize = 1024 * 1024 * 2;
                 if (fs.Length > fileSize)
                 {
-                    MessageBox.Show("·¢ËÍÎÄ¼þ´óÐ¡³¬¹ý2M£¬²»ÄÜ·¢ËÍ", "·¢ËÍÎÄ¼þ");
+                    MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½2Mï¿½ï¿½ï¿½ï¿½ï¿½Ü·ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
                 }
 
                 string filename = Path.GetFileName(txt_selectFile.Text);
-                string StrMsg = "·¢ËÍÎÄ¼þÎª£º" + filename;
+                string StrMsg = "ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Îªï¿½ï¿½" + filename;
                 byte[] arrMsg = Encoding.UTF8.GetBytes(StrMsg);
 
                 byte[] arrSend = new byte[arrMsg.Length + 1];
@@ -253,7 +254,7 @@ namespace SocketTCP
                 int length = fs.Read(buffer, 0, buffer.Length);
                 byte[] sendMsg = new byte[length + 1];
 
-                sendMsg[0] = 1;//±êÖ¾Î»Îª1£¬´ú±íÊÇÎÄ¼þ
+                sendMsg[0] = 1;//ï¿½ï¿½Ö¾Î»Îª1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 
                 Buffer.BlockCopy(buffer, 0, sendMsg, 1, length);
 
@@ -278,13 +279,13 @@ namespace SocketTCP
                     using (FileStream fs = new FileStream(FileSavePath, FileMode.Create))
                     {
                         fs.Write(bt, 1, length - 1);
-                        Invoke(() => this.txt_msg.AppendText("[±£´æ] ±£´æÎÄ¼þ³É¹¦" + FileSavePath + Environment.NewLine));
+                        Invoke(() => this.txt_msg.AppendText("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½É¹ï¿½" + FileSavePath + Environment.NewLine));
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("±£´æÎÄ¼þÊ§°Ü");
+                MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ê§ï¿½ï¿½");
             }
 
         }
