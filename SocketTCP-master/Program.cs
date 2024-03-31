@@ -14,7 +14,7 @@ namespace SocketTCP
             Application.Run(new FormTcpServer());
 
            
-            
+            //1
             //没有///
         }
     }
