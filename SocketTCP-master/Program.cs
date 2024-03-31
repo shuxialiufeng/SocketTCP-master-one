@@ -13,7 +13,7 @@ namespace SocketTCP
             ApplicationConfiguration.Initialize();
             Application.Run(new FormTcpServer());
 
-            ///修改11
+            ///修改master2
 
             //修改
 
