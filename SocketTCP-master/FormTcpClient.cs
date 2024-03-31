@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SocketTCP
 {
-    delegate void FileSaveDelegate(byte[] bt,int length);
+    delegate void FileSaveDelegate(byte[] bt,int length);//xg
     public partial class FormTcpClient : Form
     {
         public FormTcpClient()

@@ -12,8 +12,16 @@ namespace SocketTCP
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new FormTcpServer());
+<<<<<<< HEAD
 
             ///修改11
+=======
+            //修改
+
+
+
+            //zj
+>>>>>>> 57bb7209dda040020f12f32c3f6326b9fd97d04b
         }
     }
 }
